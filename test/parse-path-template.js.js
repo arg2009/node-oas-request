@@ -7,6 +7,7 @@ test('parse path templates', assert => {
 
   assert.equal(parsePathTemplate('/pets/{petId}'), '/pets/{petId}', 'keep variable template if no variables present')
   assert.equal(parsePathTemplate('/pets/{petId}', { petId: 'foo' }), '/pets/foo', 'replaces one value')
+  assert.equal(parsePathTemplate('/pets/{petId}?deleted=false', { petId: 'foo' }), '/pets/foo', 'replaces one value even if a query parameter is provided')
   assert.equal(parsePathTemplate('/{entity}/{id}', { entity: 'pet', id: '123' }), '/pet/123', 'replaces all the value')
   assert.equal(parsePathTemplate('/{entity}/{id}/{id}', { entity: 'pet', id: '123' }), '/pet/123/123', 'replaces the same value multiple times')
 })
